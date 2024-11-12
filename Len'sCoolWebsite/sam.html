@@ -1,0 +1,87 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Time till Sam's Birhtday Party🥳</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<span class="avatar"><img src="images/thumbs/sam.jpg" alt="" /></span>
+						<h1>Here you can see how much time is left untill <strong>Sam's Birhtday Party🥳</strong></h1>
+					</header>
+
+				<!-- Main -->
+					<section id="main">
+
+						<!-- Thumbnails
+							<section class="thumbnails">
+								<div>
+									<a href="/sam.html">
+										<img src="images/thumbs/sam.jpg" alt="" />
+										<h3>Time till Sam's Birhtday Party🥳</h3>
+									</a>
+								</div>
+							</section> -->
+
+						<!-- TimeTillSamsBday -->
+						 <div class="timeTillSamsBday">
+							<div>
+								<span id="days">00</span>
+								<span> Days</span>
+							</div>
+							<div>
+								<span id="hours">00</span>
+								<span> Hours</span>
+							</div>
+							<div>
+								<span id="minutes">00</span>
+								<span> Minutes</span>
+							</div>
+							<div>
+								<span id="seconds">00</span>
+								<span> Seconds</span>
+							</div>	
+						 </div>
+
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p>&copy; Len Olinger. All rights reserved.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/main.js"></script>
+
+			<script>
+				var countDownDate = new Date("Nov 23, 2024 10:00:27").getTime();
+				var x = setInterval(function(){
+					var now = new Date().getTime();
+					var distance = countDownDate - now;
+
+					var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+					var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+					var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+					document.getElementById("days").innerHTML = days;
+					document.getElementById("hours").innerHTML = hours;
+					document.getElementById("minutes").innerHTML = minutes;
+					document.getElementById("seconds").innerHTML = seconds;
+
+				}, 1000);
+			</script>
+	</body>
+</html>
