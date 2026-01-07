@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dolphin3 Chat (with memory)</title>
+<style>
+body { font-family: monospace; background: #111; color: #eee; padding: 1rem; }
+textarea { width: 100%; height: 60px; font-family: monospace; font-size: 1rem; }
+pre { white-space: pre-wrap; background: #222; padding: 1rem; border-radius: 6px; }
+button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
+#output { margin-top: 1rem; max-height: 70vh; overflow-y: auto; }
+</style>
+</head>
+<body>
+
+<h2>Dolphin3 Chat (with memory)</h2>
+<textarea id="input" placeholder="Type your message here..."></textarea><br>
+<button onclick="send()">Send</button>
+
+<pre id="output"></pre>
+
+<script>
+const API_URL = "https://human-estimation-qualifications-profits.trycloudflare.com/api/generate"; // <- replace with your tunnel URL
+const model = "dolphin3";
+
+// store conversation
+let messages = [];
+
+const input = document.getElementById("input");
+
+// Press Enter to send, Shift+Enter for newline
+input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        send();
+    }
+});
+
+async function send() {
+    const userMessage = input.value.trim();
+    if (!userMessage) return;
+
+    input.value = "";
+    const out = document.getElementById("output");
+    out.textContent += `\n> ${userMessage}\n`;
+
+    // append user message to history
+    messages.push({ role: "user", content: userMessage });
+
+    // create a single prompt with all messages
+    const fullPrompt = messages.map(m => `${m.role === "user" ? "User" : "AI"}: ${m.content}`).join("\n") + "\nAI:";
+
+    try {
+        const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                model: model,
+                prompt: fullPrompt,
+                stream: false
+            })
+        });
+
+        const data = await res.json();
+        const assistantMessage = data.response;
+
+        messages.push({ role: "assistant", content: assistantMessage });
+
+        out.textContent += `${assistantMessage}\n`;
+        out.scrollTop = out.scrollHeight;
+    } catch (err) {
+        out.textContent += `Error: ${err}\n`;
+    }
+}
+</script>
+
+</body>
+</html>
