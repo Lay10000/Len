@@ -2,10 +2,10 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Dolphin3 Chat (with memory)</title>
+<title>Manni AI</title>
 <style>
 body { font-family: monospace; background: #111; color: #eee; padding: 1rem; }
-textarea { width: 100%; height: 60px; font-family: monospace; font-size: 1rem; }
+textarea { width: 100%; height: 60px; color: #00ff44; background: #222; font-family: monospace; font-size: 1rem; }
 pre { white-space: pre-wrap; background: #222; padding: 1rem; border-radius: 6px; }
 button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
 #output { margin-top: 1rem; max-height: 70vh; overflow-y: auto; }
@@ -13,8 +13,9 @@ button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
 </head>
 <body>
 
-<h2>Dolphin3 Chat (with memory)</h2>
-<textarea id="input" placeholder="Type your message here..."></textarea><br>
+<h2>Manni AI</h2>
+<h4>The ultimate LLM - Provided by Len</h4>
+<textarea id="input" placeholder="Type your message here... (exept if you are Eno)"></textarea><br>
 <button onclick="send()">Send</button>
 
 <pre id="output"></pre>
@@ -76,3 +77,4 @@ async function send() {
 
 </body>
 </html>
+
