@@ -43,7 +43,7 @@ button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
 
     function unlock() {
       const code = document.getElementById("codeInput").value.trim();
-      if (!code) return;    
+      //if (!code) return;    
       API_URL = "https://" + code + ".trycloudflare.com/chat";
       document.getElementById("gate").style.display = "none";
       document.getElementById("chat").style.display = "block";
@@ -106,6 +106,7 @@ button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
 
 </body>
 </html>
+
 
 
 
