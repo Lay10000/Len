@@ -13,9 +13,10 @@ button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
 </head>
 <body>
 
-<h2>Manni AI</h2>
-<h4>The ultimate LLM - Provided by Len</h4>
-<textarea id="input" placeholder="Type your message here... (exept if you are Eno)"></textarea><br>
+<h2>Welcome to Manni AI</h2>
+<h4>This AI is completely private and does not save your data - Provided by Len</h4>
+<h7>Manni can make mistakes. Len is not responsible for any answers given.</h7>
+<textarea id="input" placeholder="Type your message here..."></textarea><br>
 <button onclick="send()">Send</button>
 
 <pre id="output"></pre>
@@ -67,7 +68,7 @@ async function send() {
 
         messages.push({ role: "assistant", content: assistantMessage });
 
-        out.textContent += `${assistantMessage}\n`;
+        out.textContent += `\n Manni> ${assistantMessage}\n`;
         out.scrollTop = out.scrollHeight;
     } catch (err) {
         out.textContent += `Error: ${err}\n`;
@@ -77,5 +78,6 @@ async function send() {
 
 </body>
 </html>
+
 
 
