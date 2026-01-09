@@ -46,30 +46,6 @@ button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
       if (!code) return;
     
       API_URL = "https://" + code + ".trycloudflare.com/chat";
-    
-      // Test connection with a tiny request
-      fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "manni",
-          prompt: "ping",
-          stream: false
-        })
-      })
-      .then(res => {
-        if (!res.ok) throw new Error("Invalid code");
-        return res.json();
-      })
-      .then(() => {
-        document.getElementById("gate").style.display = "none";
-        document.getElementById("chat").style.display = "block";
-      })
-      .catch(() => {
-        document.getElementById("gateError").textContent =
-          "Invalid or inactive code";
-      });
-    }
         
     /////const API_URL = "https://pages-shall-grammar-appliances.trycloudflare.com/api/generate"; // <- replace with your tunnel URL
     const model = "manni";
@@ -129,6 +105,7 @@ button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
 
 </body>
 </html>
+
 
 
 
