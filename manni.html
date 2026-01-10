@@ -74,7 +74,7 @@
 
     input.value = "";
     const out = document.getElementById("output");
-    out.textContent += `\n> ${userMessage}\n`;
+    out.textContent += `\nYou> ${userMessage}\n`;
 
     // append user message
     messages.push({ role: "user", content: userMessage });
@@ -107,6 +107,7 @@
 
 </body>
 </html>
+
 
 
 
