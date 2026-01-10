@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Manni AI</title>
-<style>
-body { font-family: monospace; background: #111; color: #eee; padding: 1rem; }
-textarea { width: 100%; height: 60px; color: #00ff44; background: #222; font-family: monospace; font-size: 1rem; }
-pre { white-space: pre-wrap; background: #222; padding: 1rem; border-radius: 6px; }
-button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
-#output { margin-top: 1rem; max-height: 70vh; overflow-y: auto; }
-</style>
+  <meta charset="utf-8">
+  <title>Manni AI</title>
+  <style>
+  body { font-family: monospace; background: #111; color: #eee; padding: 1rem; }
+  textarea { width: 100%; height: 60px; color: #00ff44; background: #222; font-family: monospace; font-size: 1rem; }
+  pre { white-space: pre-wrap; background: #222; padding: 1rem; border-radius: 6px; }
+  button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
+  #output { margin-top: 1rem; max-height: 70vh; overflow-y: auto; }
+  </style>
 </head>
 <body>
 
-<div id="gate">
-  <h2>Enter access code</h2>
-  <h6>If you have no access code, please ask Len</h6>
-  <input
-    id="codeInput"
-    type="text"
-    placeholder="xxxx-xxxx-xxxx"
-    autocomplete="off"
-  />
-  <button onclick="unlock()">Enter</button>
-  <p id="gateError" style="color:red;"></p>
-</div>
+  <div id="gate">
+    <h2>Enter access code</h2>
+    <h6>If you have no access code, please ask Len</h6>
+    <input
+      id="codeInput"
+      type="text"
+      placeholder="xxxx-xxxx-xxxx"
+      autocomplete="off"
+    />
+    <button onclick="unlock()">Enter</button>
+    <p id="gateError" style="color:red;"></p>
+  </div>
 
-<div id="chat" style="display:none;">
-    
-    <h2>Welcome to Manni AI</h2>
+  <div id="chat">
+      
+    <h1>Welcome to Manni AI</h1>
     <h4>Completely private & Doesn't sell your data like big companies do - Provided by Len</h4>
     <h7>Manni can make mistakes. Len is not responsible for any answers given.</h7>
     <h7> </h7>
@@ -36,19 +36,20 @@ button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
     <button onclick="send()">Send</button>
     
     <pre id="output"></pre>
-</div>
+  </div>
     
     <script>
 
     let API_URL = null;
 
     function unlock() {
-      const code = document.getElementById("codeInput").value.trim();
-      //if (!code) return;    
+      let code = document.getElementById("codeInput").value.trim();
+      if (code == null) return;    
       API_URL = "https://" + code + ".trycloudflare.com/chat";
+      console.log(API_URL);
       document.getElementById("gate").style.display = "none";
-      document.getElementById("chat").style.display = "block";
-        
+
+    console.log(API_URL);
     /////const API_URL = "https://pages-shall-grammar-appliances.trycloudflare.com/api/generate"; // <- replace with your tunnel URL
     const model = "manni";
     
@@ -106,11 +107,3 @@ button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
 
 </body>
 </html>
-
-
-
-
-
-
-
-
