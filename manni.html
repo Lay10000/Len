@@ -45,7 +45,7 @@
   function unlock() {
     let code = document.getElementById("codeInput").value.trim();
     if (code == null) return;    
-    API_URL = "https://" + code + ".trycloudflare.com/chat";
+    API_URL = "https://" + code + ".trycloudflare.com/api/generate";
     console.log(API_URL);
     document.getElementById("gate").style.display = "none";
   }
@@ -108,5 +108,6 @@
 
 </body>
 </html>
+
 
 
