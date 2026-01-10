@@ -8,7 +8,7 @@
   textarea { width: 100%; height: 60px; color: #00ff44; background: #222; font-family: monospace; font-size: 1rem; }
   pre { white-space: pre-wrap; background: #222; padding: 1rem; border-radius: 6px; }
   button { padding: 0.5rem 1rem; margin-top: 0.5rem; font-size: 1rem; }
-  #output { margin-top: 1rem; max-height: 70vh; overflow-y: auto; }
+  output { margin-top: 1rem; max-height: 70vh; overflow-y: auto; }
   </style>
 </head>
 <body>
@@ -48,6 +48,7 @@
     API_URL = "https://" + code + ".trycloudflare.com/chat";
     console.log(API_URL);
     document.getElementById("gate").style.display = "none";
+  }
 
   console.log(API_URL);
   /////const API_URL = "https://pages-shall-grammar-appliances.trycloudflare.com/api/generate"; // <- replace with your tunnel URL
@@ -107,4 +108,5 @@
 
 </body>
 </html>
+
 
