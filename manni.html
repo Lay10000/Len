@@ -38,72 +38,73 @@
     <pre id="output"></pre>
   </div>
     
-    <script>
+  <script>
 
-    let API_URL = null;
+  let API_URL = null;
 
-    function unlock() {
-      let code = document.getElementById("codeInput").value.trim();
-      if (code == null) return;    
-      API_URL = "https://" + code + ".trycloudflare.com/chat";
-      console.log(API_URL);
-      document.getElementById("gate").style.display = "none";
-
+  function unlock() {
+    let code = document.getElementById("codeInput").value.trim();
+    if (code == null) return;    
+    API_URL = "https://" + code + ".trycloudflare.com/chat";
     console.log(API_URL);
-    /////const API_URL = "https://pages-shall-grammar-appliances.trycloudflare.com/api/generate"; // <- replace with your tunnel URL
-    const model = "manni";
-    
-    // store conversation
-    let messages = [];
-    
-    const input = document.getElementById("input");
-    
-    // Press Enter to send, Shift+Enter for newline
-    input.addEventListener("keydown", function(e) {
-        if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            send();
-        }
-    });
-    
-    async function send() {
-        const userMessage = input.value.trim();
-        if (!userMessage) return;
-    
-        input.value = "";
-        const out = document.getElementById("output");
-        out.textContent += `\n> ${userMessage}\n`;
-    
-        // append user message to history
-        messages.push({ role: "user", content: userMessage });
-    
-        // create a single prompt with all messages
-        const fullPrompt = messages.map(m => `${m.role === "user" ? "User" : "AI"}: ${m.content}`).join("\n") + "\nAI:";
-    
-        try {
-            const res = await fetch(API_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    model: model,
-                    prompt: fullPrompt,
-                    stream: false
-                })
-            });
-    
-            const data = await res.json();
-            const assistantMessage = data.response;
-    
-            messages.push({ role: "assistant", content: assistantMessage });
-    
-            out.textContent += `\n Manni> ${assistantMessage}\n`;
-            out.scrollTop = out.scrollHeight;
-        } catch (err) {
-            out.textContent += `Error: ${err}\n`;
-        }
-    }
-    </script>
+    document.getElementById("gate").style.display = "none";
+
+  console.log(API_URL);
+  /////const API_URL = "https://pages-shall-grammar-appliances.trycloudflare.com/api/generate"; // <- replace with your tunnel URL
+  const model = "manni";
+  
+  // store conversation
+  let messages = [];
+  
+  const input = document.getElementById("input");
+  
+  // Press Enter to send, Shift+Enter for newline
+  input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          send();
+      }
+  });
+  
+  async function send() {
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
+  
+      input.value = "";
+      const out = document.getElementById("output");
+      out.textContent += `\n> ${userMessage}\n`;
+  
+      // append user message to history
+      messages.push({ role: "user", content: userMessage });
+  
+      // create a single prompt with all messages
+      const fullPrompt = messages.map(m => `${m.role === "user" ? "User" : "AI"}: ${m.content}`).join("\n") + "\nAI:";
+  
+      try {
+          const res = await fetch(API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                  model: model,
+                  prompt: fullPrompt,
+                  stream: false
+              })
+          });
+  
+          const data = await res.json();
+          const assistantMessage = data.response;
+  
+          messages.push({ role: "assistant", content: assistantMessage });
+  
+          out.textContent += `\n Manni> ${assistantMessage}\n`;
+          out.scrollTop = out.scrollHeight;
+      } catch (err) {
+          out.textContent += `Error: ${err}\n`;
+      }
+  }
+  </script>
     
 
 </body>
 </html>
+
