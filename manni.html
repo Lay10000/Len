@@ -26,7 +26,7 @@
     <p id="gateError" style="color:red;"></p>
   </div>
 
-  <div id="chat">
+  <div id="chat" style="display:none;">
       
     <h1>Welcome to Manni AI</h1>
     <h4>Completely private & Doesn't sell your data like big companies do - Provided by Len</h4>
@@ -48,6 +48,7 @@
     API_URL = "https://" + code + ".trycloudflare.com/api/chat";
     console.log(API_URL);
     document.getElementById("gate").style.display = "none";
+    document.getElementById("chat").style.display = "block";
   }
 
   console.log(API_URL);
@@ -106,6 +107,7 @@
 
 </body>
 </html>
+
 
 
 
