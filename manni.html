@@ -45,7 +45,7 @@
   function unlock() {
     let code = document.getElementById("codeInput").value.trim();
     if (code == null) return;    
-    API_URL = "https://" + code + ".trycloudflare.com/api/generate";
+    API_URL = "https://" + code + ".trycloudflare.com/api/chat";
     console.log(API_URL);
     document.getElementById("gate").style.display = "none";
   }
@@ -68,46 +68,45 @@
   });
   
   async function send() {
-      const userMessage = input.value.trim();
-      if (!userMessage) return;
-  
-      input.value = "";
-      const out = document.getElementById("output");
-      out.textContent += `\n> ${userMessage}\n`;
-  
-      // append user message to history
-      messages.push({ role: "user", content: userMessage });
-  
-      // create a single prompt with all messages
-      const fullPrompt = messages.map(m => `${m.role === "user" ? "User" : "AI"}: ${m.content}`).join("\n") + "\nAI:";
-  
-      try {
-          const res = await fetch(API_URL, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                  model: model,
-                  prompt: fullPrompt,
-                  stream: false
-              })
-          });
-  
-          const data = await res.json();
-          const assistantMessage = data.response;
-  
-          messages.push({ role: "assistant", content: assistantMessage });
-  
-          out.textContent += `\n Manni> ${assistantMessage}\n`;
-          out.scrollTop = out.scrollHeight;
-      } catch (err) {
-          out.textContent += `Error: ${err}\n`;
-      }
-  }
-  </script>
+    const userMessage = input.value.trim();
+    if (!userMessage) return;
+
+    input.value = "";
+    const out = document.getElementById("output");
+    out.textContent += `\n> ${userMessage}\n`;
+
+    // append user message
+    messages.push({ role: "user", content: userMessage });
+
+    try {
+        const res = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                model: model,
+                messages: messages,
+                stream: false
+            })
+        });
+
+        const data = await res.json();
+        const assistantMessage = data.message.content;
+
+        messages.push({ role: "assistant", content: assistantMessage });
+
+        out.textContent += `\nManni> ${assistantMessage}\n`;
+        out.scrollTop = out.scrollHeight;
+
+    } catch (err) {
+        out.textContent += `Error: ${err}\n`;
+    }
+}
+</script>
     
 
 </body>
 </html>
+
 
 
 
